@@ -1,65 +1,39 @@
-# Gimnasia y Tiro de Salta
+# Clase 5 — Formularios y seguridad XSS
 
-Sitio del hincha con secciones informativas y formularios procesados en PHP.
+Entrega de Gimnasia y Tiro de Salta. La carpeta `clase5` contiene la aplicación en PHP, sus estilos y las capturas de evidencia.
 
 ## Ejecutar con XAMPP
 
-1. Copiá la carpeta del proyecto a `C:\xampp\htdocs\gyt-nuevo`.
-2. Iniciá Apache y MySQL desde el panel de XAMPP.
-3. Para la base de usuarios, importá `database.sql` desde phpMyAdmin.
-4. Abrí `http://localhost/gyt-nuevo/`.
-5. La entrega de Clase 5 está en `http://localhost/gyt-nuevo/clase5/`.
+1. Copiá la carpeta `clase5` en `C:\xampp\htdocs\clase5`.
+2. Iniciá Apache desde el panel de XAMPP. Esta demostración no necesita MySQL: el envío válido se conserva solo en la sesión PHP.
+3. Abrí [http://localhost/clase5/](http://localhost/clase5/).
 
-## Clase 5 — Formularios y seguridad XSS
+## Formularios implementados
 
-El desarrollo está dentro de la carpeta `clase5`.
+- **POST — Contacto:** recibe nombre, correo y mensaje; valida campos obligatorios, formato del correo y longitud del mensaje. Si hay errores, muestra avisos y conserva los valores ingresados; si es válido, confirma el procesamiento.
+- **GET — Búsqueda:** filtra novedades por palabra clave o categoría, valida la consulta y muestra los resultados coincidentes.
+- **Validación y XSS:** los datos se validan en el servidor y se escapan con `htmlspecialchars()` antes de mostrarlos. El formulario es una demostración local: no envía correos ni almacena datos permanentemente.
 
-- **POST — Contacto:** procesa nombre, correo y mensaje en el servidor. Valida campos obligatorios, longitud y formato del correo. Cuando hay errores, conserva los valores ingresados; si es válido, muestra una confirmación. Esta demostración conserva el último envío en la sesión PHP y no envía correos ni guarda datos permanentemente.
-- **GET — Búsqueda:** filtra novedades por palabra clave o categoría, valida el largo de la consulta y conserva la búsqueda en el campo.
-- **Seguridad:** los valores de entrada se normalizan y validan en PHP. Todo dato dinámico que vuelve a la página se escapa con `htmlspecialchars()` antes de mostrarse.
+## Capturas de pantalla
 
-### Capturas de pantalla
+**Formularios POST y GET**
 
-Las capturas de la aplicación funcionando se guardan en [`clase5/capturas`](./clase5/capturas/):
+![Formulario de contacto POST y búsqueda GET](./clase5/capturas/clase5-formularios.png)
 
-**Formulario POST y búsqueda GET**
+**Procesamiento correcto por POST**
 
-![Formulario POST y búsqueda GET](./clase5/capturas/clase5-formularios.png)
+![Mensaje de procesamiento correcto](./clase5/capturas/clase5-post-exito.png)
 
-**POST procesado correctamente**
+**Validación del servidor y persistencia de campos**
 
-![Confirmación de procesamiento POST](./clase5/capturas/clase5-post-exito.png)
+![Errores de validación y campos conservados](./clase5/capturas/clase5-validacion.png)
 
-**Error de validación POST y campos conservados**
+**Búsqueda procesada por GET**
 
-![Validación de datos y conservación de campos](./clase5/capturas/clase5-validacion.png)
+![Resultados de búsqueda por GET](./clase5/capturas/clase5-busqueda.png)
 
-**Resultados filtrados por GET**
+**Mensajes de retroalimentación**
 
-![Resultados filtrados por GET](./clase5/capturas/clase5-busqueda.png)
+![Mensajes de error de validación](./clase5/capturas/retroalimentacion-error.png)
 
-**Mensajes de retroalimentación al enviar el formulario**
-
-![Mensaje de error de validación](./clase5/capturas/retroalimentacion-error.png)
-
-![Confirmación de envío exitoso](./clase5/capturas/retroalimentacion-exito.png)
-
-**Validación del lado del servidor en `auth.php`**
-
-![Validaciones de campos obligatorios y formato de correo en el registro](./clase5/capturas/auth-codigo-registro.png)
-
-![Validaciones de campos obligatorios y formato de correo al iniciar sesión](./clase5/capturas/auth-codigo-inicio-sesion.png)
-
-**Ejemplos de mensajes para campos vacíos y correo inválido**
-
-![Mensaje de campo obligatorio vacío](./clase5/capturas/auth-campo-vacio.png)
-
-![Mensaje para correo electrónico inválido](./clase5/capturas/auth-correo-invalido.png)
-
-**Base de usuarios y acceso**
-
-![Estructura de la tabla de usuarios en phpMyAdmin](./clase5/capturas/clase5-base-usuarios.png)
-
-![Inicio de sesión y acceso automático a la portada](./clase5/capturas/acceso-inicio-automatico.png)
-
-![Registro y acceso automático a la portada](./clase5/capturas/acceso-registro-portada.png)
+![Confirmación de envío válido](./clase5/capturas/retroalimentacion-exito.png)
